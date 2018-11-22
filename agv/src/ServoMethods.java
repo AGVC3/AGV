@@ -20,7 +20,7 @@ public class ServoMethods {
                 BoeBot.wait(10);
             }
         }
-        if (speed <= 1500) {                                                    //increase speed backwards
+        if (speed < 1500 && speed != 0) {                                                    //increase speed backwards
             while (this.s1.getPulseWidth() >= speed) {
                 this.s1.update(this.s1.getPulseWidth() + 1);
                 this.s2.update(this.s2.getPulseWidth() - 1);
