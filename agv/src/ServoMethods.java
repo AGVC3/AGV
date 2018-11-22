@@ -49,6 +49,19 @@ public class ServoMethods implements Updateble {
         this.s2.update(1500);
     }
 
+    public void turnWhileDriving (int direction) {
+        int currentSpeedL = this.s2.getPulseWidth();
+        int currentSpeedR = this.s1.getPulseWidth();
+        if (direction == 1) {                                                   //Goes right
+            s1.update(currentSpeedL - 100);
+            s2.update(currentSpeedR);
+        } else {
+            s1.update(currentSpeedL);
+            s2.update(currentSpeedR - 100);
+        }
+
+    }
+
     public void turn(int degrees) {
         if (degrees >= -180 && degrees <= 180 && degrees != 0) {
             int currentSpeedL = this.s2.getPulseWidth();

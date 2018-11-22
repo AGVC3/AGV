@@ -13,17 +13,13 @@ public class RemoteControl implements Updateble {
         int speedBackwards = (3000 - defaultSpeed);
         switch (button) {
             case 1:
-                this.control.turn(-45);
-                BoeBot.wait(10);
-                this.control.goToSpeed(defaultSpeed);
+                this.control.turnWhileDriving(-1);
                 break;
             case 2:
                 this.control.goToSpeed(defaultSpeed);
                 break;
             case 3:
-                this.control.turn(45);
-                BoeBot.wait(10);
-                this.control.goToSpeed(defaultSpeed);
+                this.control.turnWhileDriving(1);
                 break;
             case 4:
                 this.control.turn(-5);
