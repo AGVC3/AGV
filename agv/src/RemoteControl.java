@@ -1,6 +1,6 @@
 import TI.BoeBot;
 
-public class RemoteControl implements Updateble {
+public class RemoteControl implements Updateble, RemoteControlUpdate {
 
     private ServoMethods control;
 
@@ -139,4 +139,9 @@ public class RemoteControl implements Updateble {
     public void update() {
         buttonToAction(8, 1700);
     }
+
+    public void callback(int value) {
+
+    }
+
 }

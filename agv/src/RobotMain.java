@@ -6,16 +6,15 @@ import java.util.ArrayList;
 public class RobotMain {
 
     public static void main(String[] args) {
-        ArrayList<Updateble> list = new ArrayList<>();
+        ArrayList<Updateble> sensors = new ArrayList<>();
 
-        list.add(new RemoteControl(12, 13));
+        sensors.add(new RemoteControl(12, 13));
+        sensors.add(new Ultrasone());
 
         while (true) {
-            //control.buttonToAction(8,1550);
-            for (Updateble updateble : list) {
-                updateble.update();
+            for (Updateble sensor : sensors) {
+                sensor.update();
             }
-            BoeBot.wait(10);
         }
     }
 }
