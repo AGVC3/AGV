@@ -11,44 +11,78 @@ public class RemoteControl {
     public void buttonToAction(int ioPort, int defaultSpeed) {
         int button = binaryToButton(ioPort);
         int speedBackwards = (3000 - defaultSpeed);
-        if (button == 1) {                                      //turn -45 degrees and drive forwards
-            this.control.turn(-45);
-            BoeBot.wait(10);
-            this.control.goToSpeed(defaultSpeed);
+        switch (button) {
+            case 1:
+                this.control.turn(-45);
+                BoeBot.wait(10);
+                this.control.goToSpeed(defaultSpeed);
+                break;
+            case 2:
+                this.control.goToSpeed(defaultSpeed);
+                break;
+            case 3:
+                this.control.turn(45);
+                BoeBot.wait(10);
+                this.control.goToSpeed(defaultSpeed);
+                break;
+            case 4:
+                this.control.turn(-5);
+                break;
+            case 5:
+                this.control.emegencyBreak();
+                break;
+            case 6:
+                this.control.turn(5);
+                break;
+            case 7:
+                this.control.turn(45);
+                BoeBot.wait(10);
+                this.control.goToSpeed(speedBackwards);
+                break;
+            case 8:
+                this.control.goToSpeed(speedBackwards);
+                break;
+            case 9:
+                this.control.turn(-45);
+                BoeBot.wait(10);
+                this.control.goToSpeed(speedBackwards);
+                break;
         }
-        if (button == 2) {                                      //drive forwards
-            this.control.goToSpeed(defaultSpeed);
-        }
-        if (button == 3) {                                      //turn 45 degrees and drive forwards
-            this.control.turn(45);
-            BoeBot.wait(10);
-            this.control.goToSpeed(defaultSpeed);
-        }
-        if (button == 4) {                                      //turn to the left
-            this.control.turn(-5);
-        }
-        if (button == 5) {                                      //stop
-            this.control.emegencyBreak();
-        }
-        if (button == 6) {                                      //turn to the right
-            this.control.turn(5);
-        }
-        if (button == 7) {                                      //turn 45 degrees and drive backwards
-            this.control.turn(45);
-            BoeBot.wait(10);
-            this.control.goToSpeed(speedBackwards);
-        }
-        if (button == 8) {                                      //drive backwards
-            this.control.goToSpeed(speedBackwards);
-        }
-        if (button == 9) {                                      //turn -45 degrees and drive backwards
-            this.control.turn(-45);
-            BoeBot.wait(10);
-            this.control.goToSpeed(speedBackwards);
-        }
-        if (button == -1) {
-
-        }
+//        if (button == 1) {                                      //turn -45 degrees and drive forwards
+//            this.control.turn(-45);
+//            BoeBot.wait(10);
+//            this.control.goToSpeed(defaultSpeed);
+//        }
+//        if (button == 2) {                                      //drive forwards
+//            this.control.goToSpeed(defaultSpeed);
+//        }
+//        if (button == 3) {                                      //turn 45 degrees and drive forwards
+//            this.control.turn(45);
+//            BoeBot.wait(10);
+//            this.control.goToSpeed(defaultSpeed);
+//        }
+//        if (button == 4) {                                      //turn to the left
+//            this.control.turn(-5);
+//        }
+//        if (button == 5) {                                      //stop
+//            this.control.emegencyBreak();
+//        }
+//        if (button == 6) {                                      //turn to the right
+//            this.control.turn(5);
+//        }
+//        if (button == 7) {                                      //turn 45 degrees and drive backwards
+//            this.control.turn(45);
+//            BoeBot.wait(10);
+//            this.control.goToSpeed(speedBackwards);
+//        }
+//        if (button == 8) {                                      //drive backwards
+//            this.control.goToSpeed(speedBackwards);
+//        }
+//        if (button == 9) {                                      //turn -45 degrees and drive backwards
+//            this.control.turn(-45);
+//            BoeBot.wait(10);
+//            this.control.goToSpeed(speedBackwards);
+//        }
     }
 
     private int binaryToButton(int ioPort) {
