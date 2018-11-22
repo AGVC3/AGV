@@ -20,7 +20,7 @@ public class ServoMethods {
                 BoeBot.wait(10);
             }
         }
-        if (speed <= 1500) {                                                    //increase speed backwards
+        if (speed < 1500 && speed != 0) {                                                    //increase speed backwards
             while (this.s1.getPulseWidth() >= speed) {
                 this.s1.update(this.s1.getPulseWidth() + 1);
                 this.s2.update(this.s2.getPulseWidth() - 1);
@@ -47,6 +47,19 @@ public class ServoMethods {
     public void emegencyBreak() {                                               //both servos to 1500
         this.s1.update(1500);
         this.s2.update(1500);
+    }
+
+    public void turnWhileDriving (int direction) {
+        int currentSpeedL = this.s2.getPulseWidth();
+        int currentSpeedR = this.s1.getPulseWidth();
+        if (direction == 1) {                                                   //Goes right
+            s1.update(currentSpeedL - 100);
+            s2.update(currentSpeedR);
+        } else {
+            s1.update(currentSpeedL);
+            s2.update(currentSpeedR - 100);
+        }
+
     }
 
     public void turn(int degrees) {
