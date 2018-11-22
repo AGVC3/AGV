@@ -106,8 +106,6 @@ public class RemoteControl implements Updateble {
     }
 
     public void update() {
-
+        buttonToAction(8, 1700);
     }
 }
-
-
