@@ -2,7 +2,7 @@ import TI.BoeBot;
 import TI.Servo;
 import TI.Timer;
 
-public class ServoMethods {
+public class ServoMethods implements Updateble {
 
     private Servo s1;
     private Servo s2;
@@ -87,6 +87,10 @@ public class ServoMethods {
                 this.s1.update(currentSpeedR);
             }
         }
+    }
+
+    public void update() {
+
     }
 }
 

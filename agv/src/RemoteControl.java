@@ -1,6 +1,6 @@
 import TI.BoeBot;
 
-public class RemoteControl {
+public class RemoteControl implements Updateble {
 
     private ServoMethods control;
 
@@ -138,6 +138,10 @@ public class RemoteControl {
         } else {
             return binaryCode.toString();
         }
+    }
+
+    public void update() {
+
     }
 }
 

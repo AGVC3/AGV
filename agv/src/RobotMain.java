@@ -1,20 +1,23 @@
 import TI.BoeBot;
 import TI.Servo;
 
+import java.util.ArrayList;
+
 public class RobotMain {
 
     public static void main(String[] args) {
+        ArrayList<Updateble> list = new ArrayList<>();
 
-        Servo right = new Servo(12);                                //turns counter clock wise
-        Servo left = new Servo(13);                                 //turns clock wise
-        ServoMethods methodS = new ServoMethods(12, 13);
-        RemoteControl control = new RemoteControl(12, 13);
-        LEDMethods led = new LEDMethods(2);
+        list.add(new ServoMethods(12, 13));
+        list.add(new RemoteControl(12, 13));
 
         while (true) {
-            control.buttonToAction(8,1550);
+            //control.buttonToAction(8,1550);
+            /*for (Updateble updateble : list) {
+                updateble.update();
+            }
+            BoeBot.wait(10);*/
         }
-
     }
 }
 
