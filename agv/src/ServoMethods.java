@@ -7,9 +7,9 @@ public class ServoMethods {
     private Servo s1;
     private Servo s2;
 
-    public ServoMethods() {
-        this.s1 = new Servo(12);                                            //turns counterclockwise
-        this.s2 = new Servo(13);                                            //turns clockwise
+    public ServoMethods(int servo1, int servo2) {
+        this.s1 = new Servo(servo1);                                            //turns counterclockwise
+        this.s2 = new Servo(servo2);                                            //turns clockwise
     }
 
     public void goToSpeed(int speed) {

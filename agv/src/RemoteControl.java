@@ -1,11 +1,11 @@
 import TI.BoeBot;
 
-public class RemoteControl implements Updateble {
+public class RemoteControl implements Updateble, RemoteControlUpdate {
 
     private ServoMethods control;
 
-    public RemoteControl() {
-        this.control = new ServoMethods();
+    public RemoteControl(int s1, int s2) {
+        this.control = new ServoMethods(s1, s2);
     }
 
     public void buttonToAction(int ioPort, int defaultSpeed) {
@@ -107,6 +107,10 @@ public class RemoteControl implements Updateble {
 
     public void update() {
         buttonToAction(8, 1700);
+    }
+
+    public void callback(int value) {
+
     }
 
 }
