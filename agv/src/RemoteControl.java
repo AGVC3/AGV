@@ -1,44 +1,60 @@
 import TI.BoeBot;
 
-public class RemoteControl implements Updateble, RemoteControlUpdate {
+public class RemoteControl implements Updateble {
 
     private ServoMethods control;
 
-    public RemoteControl(int s1, int s2) {
-        this.control = new ServoMethods(s1, s2);
+    public RemoteControl(ServoMethods servo) {
+        this.control = servo;
+
+    }
+
+    public ServoMethods getControl() {
+        return control;
     }
 
     public void buttonToAction(int ioPort, int defaultSpeed) {
         int button = binaryToButton(ioPort);
         int speedBackwards = (3000 - defaultSpeed);
         switch (button) {
+//            case 11:                                            //Up
+//                this.control.goToSpeed(defaultSpeed);
+//            case 12:                                            //Down
+//                this.control.goToSpeed(speedBackwards);
+//            case 13:                                            //Left
+//                this.control.turn(-10);
+//            case 14:                                            //Right
+//                this.control.turn(10);
+//            case 15:                                            //Mute
+//                this.control.stop();
+
             case 1:
-                this.control.turnWhileDriving(-1);
+                this.control.stop();
                 break;
             case 2:
                 this.control.goToSpeed(defaultSpeed);
                 break;
-            case 3:
-                this.control.turnWhileDriving(1);
-                break;
+//            case 3:
+//                this.control.turnWhileDriving(1);
+//                break;
             case 4:
-                this.control.turn(-10);
+                this.control.turn(1);
                 break;
             case 5:
-                this.control.emegencyBreak();
+                this.control.goToSpeed(1500);
                 break;
             case 6:
-                this.control.turn(10);
+                this.control.turn(-1);
                 break;
-            case 7:
-                this.control.turnWhileDriving(-1);
-                break;
+//            case 7:
+//                this.control.turnWhileDriving(-1);
+//                break;
             case 8:
                 this.control.goToSpeed(speedBackwards);
                 break;
-            case 9:
-                this.control.turnWhileDriving(1);
-                break;
+//            case 9:
+//                this.control.turnWhileDriving(1);
+//                break;
         }
     }
 
@@ -107,10 +123,6 @@ public class RemoteControl implements Updateble, RemoteControlUpdate {
 
     public void update() {
         buttonToAction(8, 1700);
-    }
-
-    public void callback(int value) {
-
     }
 
 }

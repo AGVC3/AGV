@@ -7,14 +7,22 @@ public class RobotMain {
 
     public static void main(String[] args) {
         ArrayList<Updateble> sensors = new ArrayList<>();
+        ServoMethods servo = new ServoMethods();
+        RemoteControl control = new RemoteControl(servo);
 
-        sensors.add(new RemoteControl(12, 13));
-        sensors.add(new Ultrasone());
+        Ultrasone ultra = new Ultrasone(servo);
+//        sensors.add(new RemoteControl());
+        sensors.add(ultra);
+
+        control.getControl().setCurrentSpeedL(1500);
+        control.getControl().setCurrentSpeedR(1500);
 
         while (true) {
-            for (Updateble sensor : sensors) {
-                sensor.update();
-            }
+            control.update();
+            control.getControl().update();
+            BoeBot.wait(10);
+            ultra.update();
+
         }
     }
 }
