@@ -4,14 +4,29 @@ public class RemoteControl implements Updateble, RemoteControlUpdate {
 
     private ServoMethods control;
 
-    public RemoteControl(int s1, int s2) {
-        this.control = new ServoMethods(s1, s2);
+    public RemoteControl() {
+        this.control = new ServoMethods();
+    }
+
+    public ServoMethods getControl() {
+        return control;
     }
 
     public void buttonToAction(int ioPort, int defaultSpeed) {
         int button = binaryToButton(ioPort);
         int speedBackwards = (3000 - defaultSpeed);
         switch (button) {
+//            case 11:                                            //Up
+//                this.control.goToSpeed(defaultSpeed);
+//            case 12:                                            //Down
+//                this.control.goToSpeed(speedBackwards);
+//            case 13:                                            //Left
+//                this.control.turn(-10);
+//            case 14:                                            //Right
+//                this.control.turn(10);
+//            case 15:                                            //Mute
+//                this.control.stop();
+
             case 1:
                 this.control.turnWhileDriving(-1);
                 break;
@@ -25,7 +40,7 @@ public class RemoteControl implements Updateble, RemoteControlUpdate {
                 this.control.turn(-10);
                 break;
             case 5:
-                this.control.emegencyBreak();
+                this.control.stop();
                 break;
             case 6:
                 this.control.turn(10);

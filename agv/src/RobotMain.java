@@ -8,16 +8,19 @@ public class RobotMain {
     public static void main(String[] args) {
         ArrayList<Updateble> sensors = new ArrayList<>();
 
-        sensors.add(new RemoteControl(12, 13));
+        RemoteControl control = new RemoteControl();
+
+        sensors.add(new RemoteControl());
         sensors.add(new Ultrasone());
 
         while (true) {
-            for (Updateble sensor : sensors) {
-                sensor.update();
-            }
+           control.buttonToAction(8,1700);
+           control.getControl().update();
+           BoeBot.wait(10);
         }
     }
 }
+
 
 
 
