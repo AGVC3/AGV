@@ -4,93 +4,100 @@ import TI.Timer;
 
 public class ServoMethods {
 
-    private Servo leftServo;
-    private Servo rightServo;
+    private Servo s1;
+    private Servo s2;
 
-    private int currentSpeedL;
-    private int currentSpeedR;
-
-    public ServoMethods() {
-        this.leftServo = new Servo(12);                                            //turns counterclockwise
-        this.rightServo = new Servo(13);                                            //turns clockwise
-    }
-
-    public void update() {
-        this.rightServo.update(3000 - this.currentSpeedR);
-        this.leftServo.update(this.currentSpeedL);
+    public ServoMethods(int servo1, int servo2) {
+        this.s1 = new Servo(servo1);                                            //turns counterclockwise
+        this.s2 = new Servo(servo2);                                            //turns clockwise
     }
 
     public void goToSpeed(int speed) {
-        int accelaration = 40;
-        if (speed > this.currentSpeedL) {
-            this.currentSpeedR = this.currentSpeedL;
-            this.currentSpeedL += accelaration;
-            this.currentSpeedR += accelaration;
-        } else if (speed < this.currentSpeedL) {
-            this.currentSpeedR = this.currentSpeedL;
-            this.currentSpeedL -= accelaration;
-            this.currentSpeedR -= accelaration;
+        if (speed >= 1500) {                                                    //increase speed forwards
+            while (this.s2.getPulseWidth() <= speed) {
+                this.s1.update(this.s1.getPulseWidth() - 1);
+                this.s2.update(this.s2.getPulseWidth() + 1);
+                BoeBot.wait(10);
+            }
         }
-
-//        if (speed < 1500 && speed != 0) {                                                    //increase speed backwards
-//            while (this.leftServo.getPulseWidth() >= speed) {
-//                this.leftServo.update(this.leftServo.getPulseWidth() + 1);
-//                this.rightServo.update(this.rightServo.getPulseWidth() - 1);
-//                BoeBot.wait(10);
-//            }
-//        }
+        if (speed < 1500 && speed != 0) {                                                    //increase speed backwards
+            while (this.s1.getPulseWidth() >= speed) {
+                this.s1.update(this.s1.getPulseWidth() + 1);
+                this.s2.update(this.s2.getPulseWidth() - 1);
+                BoeBot.wait(10);
+            }
+        }
+        if (speed == 0) {                                                       //decrease speed to 1500
+            if (this.s2.getPulseWidth() > 1500) {
+                while (this.s2.getPulseWidth() > 1500) {
+                    this.s1.update(this.s1.getPulseWidth() + 1);
+                    this.s2.update(this.s2.getPulseWidth() - 1);
+                    BoeBot.wait(10);
+                }
+            } else {
+                while (this.s1.getPulseWidth() < 1500) {                        //increase speed to 1500
+                    this.s1.update(this.s1.getPulseWidth() - 1);
+                    this.s2.update(this.s2.getPulseWidth() + 1);
+                    BoeBot.wait(10);
+                }
+            }
+        }
     }
 
-    public Servo getleftServo() {
-        return leftServo;
-    }
-
-    public Servo getrightServo() {
-        return rightServo;
-    }
-
-    public void stop() {                                               //both servos to 1500
-        this.currentSpeedR = 1500;
-        this.currentSpeedL = 1500;
+    public void emegencyBreak() {                                               //both servos to 1500
+        this.s1.update(1500);
+        this.s2.update(1500);
     }
 
     public void turnWhileDriving (int direction) {
+        int currentSpeedL = this.s2.getPulseWidth();
+        int currentSpeedR = this.s1.getPulseWidth();
         if (direction == 1) {                                                   //Goes right
-            this.currentSpeedR -= 75;
-        } else if (direction == -1) {
-            this.currentSpeedL -= 75;
+            s1.update(currentSpeedL - 100);
+            s2.update(currentSpeedR);
+        } else {
+            s1.update(currentSpeedL);
+            s2.update(currentSpeedR - 100);
         }
+
     }
 
     public void turn(int degrees) {
         if (degrees >= -180 && degrees <= 180 && degrees != 0) {
+            int currentSpeedL = this.s2.getPulseWidth();
+            int currentSpeedR = this.s1.getPulseWidth();
+
             if (degrees > 0) {                                                  //turn to the right
-                stop();
+                this.s1.update(1500);
                 double part = degrees / 180.0;
-                int time = (int) Math.round(1915 * part);
+                int time = (int) Math.round(5000 * part);
                 System.out.println(time);
                 Timer timer = new Timer(time);
                 while (true) {
-                    this.currentSpeedR = 1600;
+                    this.s2.update(1600);
                     if (timer.timeout()) {
                         System.out.println("stop");
                         break;
                     }
                 }
+                this.s2.update(currentSpeedL);
+                this.s1.update(currentSpeedR);
             }
 
             if (degrees < 0) {                                                     //turn to the left
-                stop();
+                this.s2.update(1500);
                 double part = Math.abs(degrees) / 180.0;
-                int time = (int) Math.round(1915 * part);
+                int time = (int) Math.round(5000 * part);
                 Timer timer = new Timer(time);
                 System.out.println(time);
                 while (true) {
-                    this.currentSpeedL = 1400;
+                    this.s1.update(1400);
                     if (timer.timeout()) {
                         break;
                     }
                 }
+                this.s2.update(currentSpeedL);
+                this.s1.update(currentSpeedR);
             }
         }
     }
