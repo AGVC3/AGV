@@ -2,16 +2,20 @@ import TI.BoeBot;
 
 public class Ultrasone implements Updateble {
 
-    public Ultrasone() {
+    private ServoMethods servo;
 
+    public Ultrasone() {
+        this.servo = new ServoMethods();
     }
 
     public void update() {
-        BoeBot.digitalWrite(0, true);
+        BoeBot.digitalWrite(10,true);
         BoeBot.wait(1);
-        BoeBot.digitalWrite(0, false);
+        BoeBot.digitalWrite(10,false);
+        int pulse = BoeBot.pulseIn(11,true, 10000);
 
-        int pulse = BoeBot.pulseIn(5, true, 10000);
-        System.out.println(pulse);
+        if (pulse < 2000) {
+            this.servo.goToSpeed(0);
+        }
     }
 }
