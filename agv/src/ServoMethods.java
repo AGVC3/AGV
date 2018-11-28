@@ -2,11 +2,10 @@ import TI.BoeBot;
 import TI.Servo;
 import TI.Timer;
 
-public class ServoMethods {
+public class ServoMethods implements Updateble {
 
     private Servo leftServo;
     private Servo rightServo;
-
 
     private int currentSpeedL;
     private int currentSpeedR;
@@ -27,7 +26,7 @@ public class ServoMethods {
             this.currentSpeedR = this.currentSpeedL;
             this.currentSpeedL += accelaration;
             this.currentSpeedR += accelaration;
-        }  else if (speed < this.currentSpeedL) {
+        } else if (speed < this.currentSpeedL) {
             this.currentSpeedR = this.currentSpeedL;
             this.currentSpeedL -= accelaration;
             this.currentSpeedR -= accelaration;
@@ -63,12 +62,25 @@ public class ServoMethods {
         this.currentSpeedL = 1500;
     }
 
-    public void turnWhileDriving (int direction) {
+    public void turnWhileDriving(int direction) {
         if (direction == 1) {                                                   //Goes right
             this.currentSpeedR -= 75;
         } else if (direction == -1) {
             this.currentSpeedL -= 75;
         }
+    }
+
+    public void achtjedraaien() {
+        turn(1);
+        turn(1);
+        turn(1);
+        turn(1);
+        turn(1);
+
+
+        BoeBot.wait(1000);
+        stop();
+
     }
 
     public void turn(int direction) {
@@ -77,7 +89,6 @@ public class ServoMethods {
         } else {
             currentSpeedL += 20;
         }
-
 
 //        if (degrees >= -180 && degrees <= 180 && degrees != 0) {
 //            if (degrees > 0) {                                                  //turn to the right

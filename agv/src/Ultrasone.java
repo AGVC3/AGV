@@ -14,12 +14,9 @@ public class Ultrasone implements Updateble {
         BoeBot.digitalWrite(10, false);
 
         int pulse = BoeBot.pulseIn(11, true, 10000);
-        if (pulse != -2 && !(pulse > 9000) && pulse != 17 && pulse != -1 && pulse < 2500) {
+        if (pulse != -2 && !(pulse > 9000) && pulse != 17 && pulse != -1 && pulse < 5000) {
             System.out.println(pulse);
             this.servo.stop();
-        }
-        if (pulse < 300) {
-//            this.servo.stop();
         }
     }
 }

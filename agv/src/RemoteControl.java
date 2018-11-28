@@ -32,13 +32,27 @@ public class RemoteControl implements Updateble {
                 this.control.stop();
                 break;
             case 2:
-                this.control.goToSpeed(defaultSpeed);
+                BoeBot.digitalWrite(10, true);
+                BoeBot.wait(1);
+                BoeBot.digitalWrite(10, false);
+
+                int pulse = BoeBot.pulseIn(11, true, 10000);
+                if (!(pulse != -2 && !(pulse > 9000) && pulse != 17 && pulse != -1 && pulse < 5000)) {
+                    this.control.goToSpeed(defaultSpeed);
+                }
+                System.out.println("2");
                 break;
-//            case 3:
-//                this.control.turnWhileDriving(1);
-//                break;
+            case 3:
+                System.out.println("3");
+                this.control.turn(1);
+                this.control.update();
+                BoeBot.wait(1000);
+                this.control.stop();
+
+                break;
             case 4:
                 this.control.turn(1);
+                System.out.println("4");
                 break;
             case 5:
                 this.control.goToSpeed(1500);
@@ -60,7 +74,6 @@ public class RemoteControl implements Updateble {
 
     private int binaryToButton(int ioPort) {
         String button = buttonToBinary(ioPort);
-
         switch (button) {
             case "000010001001":
                 return 0;
@@ -114,9 +127,12 @@ public class RemoteControl implements Updateble {
             }
 
             wtfAmIDoingV2.reverse();
+
             return wtfAmIDoingV2.toString();
 
+
         } else {
+
             return binaryCode.toString();
         }
     }
