@@ -10,19 +10,25 @@ public class RobotMain {
         ServoMethods servo = new ServoMethods();
         RemoteControl control = new RemoteControl(servo);
         Ultrasone ultra = new Ultrasone(servo);
+        LineSensor lineSensor = new LineSensor(servo);
 
         sensors.add(control);
-        sensors.add(ultra);
         sensors.add(servo);
+        sensors.add(ultra);
+//        sensors.add(lineSensor);
 
         control.getControl().setCurrentSpeedL(1500);
         control.getControl().setCurrentSpeedR(1500);
+
+        BoeBot.digitalWrite(0, true);
 
         while (true) {
             for (Updateble sensor : sensors) {
                 sensor.update();
             }
-            BoeBot.wait(10);
+
+
+            BoeBot.wait(100);
 
 //            int pulseLen = BoeBot.pulseIn(8, false, 6000);
 //            if (pulseLen > 2000) {

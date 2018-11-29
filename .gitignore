@@ -1,3 +1,7 @@
 
 *.xml
 agv/.idea/workspace.xml
+*.class
+agv/out/production/helloBooBot/RobotMain.class
+agv/out/production/helloBooBot/ServoMethods.class
+agv/out/production/helloBooBot/Ultrasone.class

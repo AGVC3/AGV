@@ -21,6 +21,7 @@ public class ServoMethods implements Updateble {
     }
 
     public void goToSpeed(int speed) {
+        BoeBot.digitalWrite(15,true);
         int accelaration = 20;
         if (speed > this.currentSpeedL) {
             this.currentSpeedR = this.currentSpeedL;
