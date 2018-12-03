@@ -10,7 +10,7 @@ public class Ultrasone implements Updateble {
 
     public void update() {
         BoeBot.digitalWrite(10, true);
-        BoeBot.wait(1);
+        BoeBot.wait(0,500);
         BoeBot.digitalWrite(10, false);
 
         int pulse = BoeBot.pulseIn(11, true, 10000);
