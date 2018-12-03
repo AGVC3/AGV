@@ -11,6 +11,8 @@ public class RobotMain {
         RemoteControl control = new RemoteControl(servo);
         Ultrasone ultra = new Ultrasone(servo);
         LineSensor lineSensor = new LineSensor(servo);
+        BluetoothTrial BT = new BluetoothTrial();
+
 
         sensors.add(control);
         sensors.add(servo);
@@ -26,6 +28,7 @@ public class RobotMain {
             for (Updateble sensor : sensors) {
                 sensor.update();
             }
+            BT.tokyoDrift();
 
 
             BoeBot.wait(100);
